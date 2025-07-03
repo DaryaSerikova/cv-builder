@@ -1,13 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import type { EducationFieldType } from '~/types/types';
 
 
-// Education education
-export type EducationFieldType = {
-  institution?: string,
-  specialty?: string,
-  period?: string[],
-}
+
 
 interface EducationState {
   education: EducationFieldType | null;

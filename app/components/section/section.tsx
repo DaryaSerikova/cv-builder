@@ -7,10 +7,13 @@ import { updateExperience } from 'store/slices/experienceSlice';
 import { updateEducation } from 'store/slices/educationSlice';
 import { updateSkills } from 'store/slices/skillsSlice';
 import { arrAboutme, arrCertificates, arrEducation, arrExperience, arrSkills } from './data';
+import type { AboutmeFieldType, CertificatesFieldType, 
+  EducationFieldType, ExperienceFieldType, SkillsFieldType } from '~/types/types';
 import dayjs, {Dayjs} from 'dayjs';
 import { objEngRu } from './data';
 import { updateAboutme } from 'store/slices/aboutmeSlice';
 import { updateCertificates } from 'store/slices/certificatesSlice';
+import { removeSection } from 'store/slices/sectionsSlice';
 
 
 export interface IArrItems {
@@ -19,13 +22,23 @@ export interface IArrItems {
   type: 'input' | 'datepicker' | 'textarea';
 }
 
-interface ISection<T> {
-  // array: IArrItems[];
-  name: string;
+// interface ISection<T> {
+interface ISection {
+  name: 'experience' | 'education' | 'skills' | 'aboutme' | 'certificates';
+}
+
+type FormType = {
+  experience: ExperienceFieldType;
+  education: EducationFieldType,
+  skills: SkillsFieldType,
+  aboutme: AboutmeFieldType,
+  certificates: CertificatesFieldType,
 }
 
 
-const Section = <T,>({ name }: ISection<T>) => {
+// const Section = <T,>({ name }: ISection<T>) => {
+const Section = <K extends keyof FormType>({ name }: ISection) => {
+
   const { Item } = Form;
   const { TextArea } = Input;
   const { RangePicker } = DatePicker;
@@ -70,8 +83,9 @@ const Section = <T,>({ name }: ISection<T>) => {
     if (name === 'aboutme') dispatch(updateAboutme(allValues));
     if (name === 'certificates') dispatch(updateCertificates(allValues));
   }
-  const handleRemove = (e) => {
-    console.log('e.target.value: ', e.target.value)
+  const handleRemove = () => {
+    console.log('name: ', name)
+    dispatch(removeSection(name));
   }
 
   return (
@@ -91,9 +105,9 @@ const Section = <T,>({ name }: ISection<T>) => {
           if (field?.type === 'textarea') child = <TextArea />
           return (<>
             <Item<T>
-              // label={isSimple ? '' : field?.label}
+              label={isSimple ? '' : field?.label}
 
-              label={field?.label}
+              // label={field?.label}
               name={field?.name}>
                 {child}
             </Item>

@@ -3,15 +3,10 @@ import type { MenuProps, FormProps } from 'antd';
 import { Select, Button, Form } from 'antd';
 import Section from '~/components/section/section';
 import SectionPreview from '~/components/sectionPreview/sectionPreview';
-import type { ExperienceFieldType } from 'store/slices/experienceSlice';
-import type { EducationFieldType } from 'store/slices/educationSlice';
-import type { SkillsFieldType } from 'store/slices/skillsSlice';
 import { useAppSelector } from 'store/hooks';
 import { useState } from 'react';
 import { useAppDispatch } from 'store/hooks';
 import { addSection } from 'store/slices/sectionsSlice';
-import type { AboutmeFieldType } from 'store/slices/aboutmeSlice';
-import type { CertificatesFieldType } from 'store/slices/certificatesSlice';
 
 type FieldType = {
   section?: string;
@@ -29,7 +24,7 @@ export function Welcome() {
   const dispatch = useAppDispatch();
 
   const sections = useAppSelector((state) => state.sections?.sections);
-  console.log('sections: ', sections)
+  console.log('sections (redux): ', sections)
   console.log("mainState: ", mainState)
 
 
@@ -97,7 +92,7 @@ export function Welcome() {
               label="section"
               name="section">
                 <Select
-                  defaultValue="lucy"
+                  defaultValue='Тип секции'
                   style={{ width: 150 }}
                   onChange={handleChange} //Опыт, Образование, Навыки, Сертификаты, О себе.
                   options={[
@@ -113,28 +108,33 @@ export function Welcome() {
               <Button htmlType="submit">Добавить секцию</Button>
             </Item>
           </Form>
-          {/* {sections && sections?.map((name) => {
-            <Section<ExperienceFieldType> name='Опыт' array={arrExperience} />
-          })} */}
-            
-          <Section<ExperienceFieldType> name='experience' />
-          <Section<EducationFieldType> name='education' />
-          <Section<SkillsFieldType> name='skills' />
-          
-          <Section<AboutmeFieldType> name='aboutme' />
-          <Section<CertificatesFieldType> name='certificates' /> 
+          {sections && sections?.map((name) => {
 
-          {/* experience, education, skills, certificates, aboutme */}
+            return <Section name={name} />
+          })}
+{/* 
+          <Section name='experience' />
+          <Section name='education' />
+          <Section name='skills' />
+  
+          <Section name='aboutme' />
+          <Section name='certificates' />  */}
+
         </div>
 
 
         <div className={s.block}>
-          {experience && <SectionPreview name={'experience'} />}
+          {sections && sections?.map((section) => {
+            if (!mainState?.[`${section}`]?.[`${section}`]) return <></>
+            else return <SectionPreview name={section} />
+          })}
+
+          {/* {experience && <SectionPreview name={'experience'} />}
           {education && <SectionPreview name={'education'} />}
           {skills && <SectionPreview name={'skills'} />}
 
           {certificates && <SectionPreview name={'certificates'} />}
-          {aboutme && <SectionPreview name={'aboutme'} />}
+          {aboutme && <SectionPreview name={'aboutme'} />} */}
 
         </div>
       </div>

@@ -1,11 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import type { CertificatesFieldType } from '~/types/types';
 
 
-
-export type CertificatesFieldType = {
-  certificates?: string; 
-}
 
 interface CertificatesState {
   certificates: CertificatesFieldType | null;

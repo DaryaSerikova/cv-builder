@@ -1,11 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import type { AboutmeFieldType } from '~/types/types';
 
 
 
-export type AboutmeFieldType = {
-  aboutme?: string; 
-}
 
 interface AboutmeState {
   aboutme: AboutmeFieldType | null;

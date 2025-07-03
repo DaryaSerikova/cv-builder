@@ -28,8 +28,9 @@ const experienceSlice = createSlice({
       // console.log("action.payload: ", action.payload)
       state.sections = state.sections ? [...state.sections, action.payload] : [action.payload];
     },
-    removeSection(state) {
-      // state.sections = null;
+    removeSection(state, action: PayloadAction<SectionsFieldType>) {
+      console.log("action.payload (remove): ", action.payload)
+      state.sections = state?.sections?.filter((section) => section !== action.payload)
     }
   },
 });

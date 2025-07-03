@@ -1,14 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import type { ExperienceFieldType } from '~/types/types';
 
 
 
-export type ExperienceFieldType = {
-  position?: string; 
-  company?: string;
-  period?: string[]; ///???
-  description?: string;
-}
 
 interface ExperienceState {
   experience: ExperienceFieldType | null;

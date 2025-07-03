@@ -1,11 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import type { SkillsFieldType } from '~/types/types';
 
 
-//Skills skills
-export type SkillsFieldType = {
-  skills: string,
-}
+
 
 interface SkillsState {
   skills: SkillsFieldType | null;
