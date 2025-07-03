@@ -1,0 +1,24 @@
+.page {
+  padding: 30px 8%;
+  .container {
+    background-color: white;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+
+    .block {
+      background-color: rgb(246, 246, 246);
+      width: 100%;
+      padding: 30px;
+
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+    }
+  }
+
+}
