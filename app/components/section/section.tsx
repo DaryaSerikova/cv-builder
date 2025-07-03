@@ -30,7 +30,7 @@ const Section = <T,>({ name }: ISection<T>) => {
 
   const isSimple = name === 'experience' || name === 'education' ? false : true;
 
-  const objArray = {
+  const objGetArray = {
     'experience': arrExperience,
     'education': arrEducation,
     'skills': arrSkills,
@@ -50,14 +50,22 @@ const Section = <T,>({ name }: ISection<T>) => {
   };
 
   const onValuesChange: FormProps<T>['onValuesChange'] = (changedValues, allValues) => {
-    // console.log('changedValues: ', changedValues); //конкретно измененное поле
-    // console.log('allValues: ', allValues)
+    console.log('changedValues: ', changedValues); //конкретно измененное поле
+
+    console.log('allValues (general): ', allValues)
+    if (allValues?.period) {
+      let [start, end] = allValues?.period;
+      [start, end] = [start.format('DD.MM.YYYY'), end.format('DD.MM.YYYY')]
+      allValues.period = [start, end];
+    }
+
+
     if (name === 'experience') dispatch(updateExperience(allValues));
     if (name === 'education') dispatch(updateEducation(allValues));
     if (name === 'skills') dispatch(updateSkills(allValues));
 
-    // if (name === 'Опыт') dispatch(updateExperience(allValues))
-    // if (name === 'Опыт') dispatch(updateExperience(allValues))
+    // if (name === 'certificates') dispatch(updateExperience(allValues))
+    // if (name === 'aboutme') dispatch(updateExperience(allValues))
     // if (name === 'Опыт') dispatch(updateExperience(allValues))
 
   }
@@ -76,9 +84,9 @@ const Section = <T,>({ name }: ISection<T>) => {
       >
 
         <div className={s.name}>{name}</div>
-        { objArray[`${name}`]?.map((field: IArrItems) => {
+        { objGetArray[`${name}`]?.map((field: IArrItems) => {
           let child = <Input></Input>;
-          if (field?.type === 'datepicker') child = <RangePicker />
+          if (field?.type === 'datepicker') child = <RangePicker format={'DD.MM.YYYY'}/>
           if (field?.type === 'textarea') child = <TextArea />
           return (<>
             <Item<T>

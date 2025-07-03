@@ -19,5 +19,11 @@
     display: grid;
     grid-template-columns: 1fr 5fr;
     gap: 20px;
+
+    .item {
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+    }
   }
 }

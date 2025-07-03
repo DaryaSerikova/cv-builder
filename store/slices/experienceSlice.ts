@@ -6,7 +6,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 export type ExperienceFieldType = {
   position?: string; 
   company?: string;
-  period?: string; ///???
+  period?: string[]; ///???
   description?: string;
 }
 

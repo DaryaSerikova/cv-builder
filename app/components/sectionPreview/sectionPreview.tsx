@@ -1,27 +1,32 @@
 import React from 'react';
-import s from './sectionPreview.module.scss'
+import s from './sectionPreview.module.scss';
+import { objEngRu } from '../section/data';
+import { useAppSelector } from 'store/hooks';
 
-type Props = {}
 
-interface ISectionPreview<T> {
-  arrState: T,
-  oblEngRu: object,
+
+interface ISectionPreview {
   name: string,
 }
 
-const SectionPreview = <T,>({arrState, objEngRu, name}: ISectionPreview) => {
+const SectionPreview = ({ name}: ISectionPreview) => {
+  
+  const stateSection = useAppSelector((state) => state[`${name}`]?.[`${name}`]);
+  const arrState = stateSection ? Object.entries(stateSection) : null;
+
   return (
     <article className={s.section}>
-      <div className={s.name}>{name}</div>
+      <div className={s.name}>{objEngRu[`${name}`].ru}</div>
       <div className={s.body}>
-      {/* {experience && <>
 
-      </>} */}
       {arrState?.map((field) => {
-        const nameField = objEngRu[`${field[0]}`];
+        const nameField = objEngRu[`${name}`].arr[`${field[0]}`];
+        let dataNode = field[0] !== 'period' 
+        ? <>{field?.[1]}</> 
+        : <><p>{field?.[1][0]}</p> - <p>{field?.[1][1]}</p></>;
         return(<>
             <div className={s.item}>{nameField}</div>
-            <div className={s.item}>{field?.[1]}</div>
+            <div className={s.item}>{dataNode}</div>
           </>)
         })
       }
@@ -30,4 +35,4 @@ const SectionPreview = <T,>({arrState, objEngRu, name}: ISectionPreview) => {
   )
 }
 
-export default SectionPreview
+export default SectionPreview;

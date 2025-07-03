@@ -6,7 +6,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 export type EducationFieldType = {
   institution?: string,
   specialty?: string,
-  period?: string,
+  period?: string[],
 }
 
 interface EducationState {

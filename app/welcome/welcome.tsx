@@ -6,7 +6,6 @@ import SectionPreview from '~/components/sectionPreview/sectionPreview';
 import type { ExperienceFieldType } from 'store/slices/experienceSlice';
 import type { EducationFieldType } from 'store/slices/educationSlice';
 import type { SkillsFieldType } from 'store/slices/skillsSlice';
-import { arrExperience, arrEducation, arrSkills } from '~/components/section/data';
 import { useAppSelector } from 'store/hooks';
 import { useState } from 'react';
 import { useAppDispatch } from 'store/hooks';
@@ -26,31 +25,23 @@ export function Welcome() {
   const dispatch = useAppDispatch();
 
   const sections = useAppSelector((state) => state.sections?.sections);
-
   console.log('sections: ', sections)
-
-  const arrStateExperience = experience ? Object.entries(experience) : null;
-  const arrStateEducation = education ? Object.entries(education) : null;
-  const arrStateSkills = skills ? Object.entries(skills) : null;
-
   console.log("mainState: ", mainState)
-  // console.log("---   experience: ", experience)
-  // console.log('---   arrStateExperience: ', arrStateExperience)
 
 
   const { Item } = Form;
 
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    console.log('Success:', values);
+    // console.log('Success:', values);
     dispatch(addSection(section));
   };
   
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    // console.log('Failed:', errorInfo);
   };
 
   const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
     setSection(value);
   };
 
@@ -81,22 +72,7 @@ export function Welcome() {
 
 
 
-  const objExperience = {
-    'position': 'Должность',
-    'company': 'Компания',
-    'period': 'Период',
-    'description': 'Описание',
-  }
 
-  const objEducation = {
-    'institution': 'Учебное заведение',
-    'specialty': 'Специальность',
-    'period': 'Период',
-  }
-
-  const objSkills = {
-    'skills': 'Навыки',
-  }
 
   return (
     <main className={s.page}>
@@ -145,23 +121,9 @@ export function Welcome() {
 
 
         <div className={s.block}>
-          {experience && <SectionPreview<ExperienceFieldType> 
-            arrState={arrStateExperience} 
-            objEngRu={objExperience} 
-            name='Опыт'
-            />}
-
-          {education && <SectionPreview<EducationFieldType>
-            arrState={arrStateEducation}
-            objEngRu={objEducation}
-            name={'Образование'}
-          />}
-
-          {skills && <SectionPreview
-            arrState={arrStateSkills}
-            objEngRu={objSkills}
-            name={'Навыки'}
-          />}
+          {experience && <SectionPreview name={'experience'} />}
+          {education && <SectionPreview name={'education'} />}
+          {skills && <SectionPreview name={'skills'} />}
 
         </div>
       </div>
