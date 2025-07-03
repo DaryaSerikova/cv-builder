@@ -10,6 +10,8 @@ import { useAppSelector } from 'store/hooks';
 import { useState } from 'react';
 import { useAppDispatch } from 'store/hooks';
 import { addSection } from 'store/slices/sectionsSlice';
+import type { AboutmeFieldType } from 'store/slices/aboutmeSlice';
+import type { CertificatesFieldType } from 'store/slices/certificatesSlice';
 
 type FieldType = {
   section?: string;
@@ -22,6 +24,8 @@ export function Welcome() {
   const experience = useAppSelector((state) => state.experience?.experience);
   const education = useAppSelector((state) => state.education?.education);
   const skills = useAppSelector((state) => state.skills?.skills);
+  const aboutme = useAppSelector((state) => state.aboutme?.aboutme);
+  const certificates = useAppSelector((state) => state.certificates?.certificates);
   const dispatch = useAppDispatch();
 
   const sections = useAppSelector((state) => state.sections?.sections);
@@ -116,6 +120,10 @@ export function Welcome() {
           <Section<ExperienceFieldType> name='experience' />
           <Section<EducationFieldType> name='education' />
           <Section<SkillsFieldType> name='skills' />
+          
+          <Section<AboutmeFieldType> name='aboutme' />
+          <Section<CertificatesFieldType> name='certificates' /> 
+
           {/* experience, education, skills, certificates, aboutme */}
         </div>
 
@@ -124,6 +132,9 @@ export function Welcome() {
           {experience && <SectionPreview name={'experience'} />}
           {education && <SectionPreview name={'education'} />}
           {skills && <SectionPreview name={'skills'} />}
+
+          {certificates && <SectionPreview name={'certificates'} />}
+          {aboutme && <SectionPreview name={'aboutme'} />}
 
         </div>
       </div>

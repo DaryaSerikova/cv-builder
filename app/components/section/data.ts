@@ -18,6 +18,16 @@ export const arrSkills: IArrItems[] = [
   {label: 'Навыки', name: 'skills', type: 'textarea'}
 ];
 
+export const arrAboutme: IArrItems[] = [
+  {label: 'О себе', name: 'aboutme', type: 'textarea'},
+]
+
+export const arrCertificates: IArrItems[] = [
+  {label: 'Сертификаты', name: 'certificates', type: 'textarea'},
+]
+//Опыт, Образование, Навыки, Сертификаты, О себе.
+// experience, education, skills, certificates, aboutme
+//
 const enRuExperience = {
   'position': 'Должность',
   'company': 'Компания',
@@ -35,16 +45,21 @@ const enRuSkills = {
   'skills': 'Навыки',
 };
 
+const enRuAboutme = {
+  'aboutme': 'О себе'
+}
+
+const enRuCertificates = {
+  'certificates': 'Сертификаты'
+}
+
 export const objEngRu = {
   'experience': {arr: enRuExperience, ru: 'Опыт'},
   'education': {arr: enRuEducation, ru: 'Образование'},
   'skills': {arr: enRuSkills, ru: 'Навыки'},
-  //'certificates'
-  //'aboutme'
+  'aboutme': {arr: enRuAboutme, ru: 'О себе'},
+  'certificates': {arr: enRuCertificates, ru: 'Сертификаты'},
 }
 
 
 
-//Опыт, Образование, Навыки, Сертификаты, О себе.
-// experience, education, skills, certificates, aboutme
-//

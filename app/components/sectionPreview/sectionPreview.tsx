@@ -23,7 +23,7 @@ const SectionPreview = ({ name}: ISectionPreview) => {
         const nameField = objEngRu[`${name}`].arr[`${field[0]}`];
         let dataNode = field[0] !== 'period' 
         ? <>{field?.[1]}</> 
-        : <><p>{field?.[1][0]}</p> - <p>{field?.[1][1]}</p></>;
+        : <><p>{field?.[1]?.[0]}</p> - <p>{field?.[1]?.[1]}</p></>;
         return(<>
             <div className={s.item}>{nameField}</div>
             <div className={s.item}>{dataNode}</div>

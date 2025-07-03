@@ -5,12 +5,16 @@ import educationSlice from './slices/educationSlice';
 import resumeSlice from './slices/resumeSlice';
 import skillsSlice from './slices/skillsSlice'
 import sectionsSlice from './slices/sectionsSlice';
+import aboutmeSlice from './slices/aboutmeSlice';
+import certificatesSlice from './slices/certificatesSlice';
 
 export const store = configureStore({
   reducer: {
     experience: experienceSlice,
     education: educationSlice,
     skills: skillsSlice,
+    aboutme: aboutmeSlice,
+    certificates: certificatesSlice,
     // resume: resumeSlice,
     sections: sectionsSlice,
   },

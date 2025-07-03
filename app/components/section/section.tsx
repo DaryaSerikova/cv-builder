@@ -6,8 +6,11 @@ import { useAppDispatch } from 'store/hooks';
 import { updateExperience } from 'store/slices/experienceSlice';
 import { updateEducation } from 'store/slices/educationSlice';
 import { updateSkills } from 'store/slices/skillsSlice';
-import { arrEducation, arrExperience, arrSkills } from './data';
+import { arrAboutme, arrCertificates, arrEducation, arrExperience, arrSkills } from './data';
 import dayjs, {Dayjs} from 'dayjs';
+import { objEngRu } from './data';
+import { updateAboutme } from 'store/slices/aboutmeSlice';
+import { updateCertificates } from 'store/slices/certificatesSlice';
 
 
 export interface IArrItems {
@@ -34,7 +37,8 @@ const Section = <T,>({ name }: ISection<T>) => {
     'experience': arrExperience,
     'education': arrEducation,
     'skills': arrSkills,
-
+    'aboutme': arrAboutme,
+    'certificates': arrCertificates,
   }
   // experience, education, skills, certificates, aboutme
   
@@ -63,11 +67,8 @@ const Section = <T,>({ name }: ISection<T>) => {
     if (name === 'experience') dispatch(updateExperience(allValues));
     if (name === 'education') dispatch(updateEducation(allValues));
     if (name === 'skills') dispatch(updateSkills(allValues));
-
-    // if (name === 'certificates') dispatch(updateExperience(allValues))
-    // if (name === 'aboutme') dispatch(updateExperience(allValues))
-    // if (name === 'Опыт') dispatch(updateExperience(allValues))
-
+    if (name === 'aboutme') dispatch(updateAboutme(allValues));
+    if (name === 'certificates') dispatch(updateCertificates(allValues));
   }
   const handleRemove = (e) => {
     console.log('e.target.value: ', e.target.value)
@@ -83,7 +84,7 @@ const Section = <T,>({ name }: ISection<T>) => {
         onValuesChange={onValuesChange}
       >
 
-        <div className={s.name}>{name}</div>
+        <div className={s.name}>{objEngRu[`${name}`].ru}</div>
         { objGetArray[`${name}`]?.map((field: IArrItems) => {
           let child = <Input></Input>;
           if (field?.type === 'datepicker') child = <RangePicker format={'DD.MM.YYYY'}/>
