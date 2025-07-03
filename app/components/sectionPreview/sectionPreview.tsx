@@ -20,10 +20,12 @@ const SectionPreview = ({ name}: ISectionPreview) => {
       <div className={s.body}>
 
       {arrState?.map((field) => {
+        console.log('field: ', field)
+        console.log('!!field?.[1]: ', !!field?.[1])
         const nameField = objEngRu[`${name}`].arr[`${field[0]}`];
-        let dataNode = field[0] !== 'period' 
-        ? <>{field?.[1]}</> 
-        : <><p>{field?.[1]?.[0]}</p> - <p>{field?.[1]?.[1]}</p></>;
+        let dataNode = field[0] === 'period' && !!field?.[1]
+        ? <><p>{field?.[1][0]}</p> - <p>{field?.[1][1]}</p></>
+        : <>{field?.[1]}</>;
         return(<>
             <div className={s.item}>{nameField}</div>
             <div className={s.item}>{dataNode}</div>
