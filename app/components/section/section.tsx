@@ -1,20 +1,19 @@
 import React from 'react';
 import { Button, Form, Input, DatePicker } from 'antd';
 import type { FormProps } from 'antd';
-import s from './section.module.scss';
 import { useAppDispatch } from 'store/hooks';
-// import { updateExperience } from 'store/slices/experienceSlice';
-// import { updateEducation } from 'store/slices/educationSlice';
-// import { updateSkills } from 'store/slices/skillsSlice';
-// import { updateAboutme } from 'store/slices/aboutmeSlice';
-// import { updateCertificates } from 'store/slices/certificatesSlice';
-import { arrAboutme, arrCertificates, arrEducation, arrExperience, arrSkills } from './data';
-import type { AboutmeFieldType, CertificatesFieldType, 
-  EducationFieldType, ExperienceFieldType, SkillsFieldType } from '~/types/types';
-import dayjs, {Dayjs} from 'dayjs';
-import { objEngRu } from './data';
-// import { removeSection } from 'store/slices/sectionsSlice';
 import { removeSection, updateSection } from 'store/slices/sectionsSlice';
+import type { Section } from 'store/slices/sectionsSlice';
+import { arrAboutme, arrCertificates, arrEducation, arrExperience, arrSkills } from './data';
+import type { 
+  AboutmeFieldType, 
+  CertificatesFieldType, 
+  EducationFieldType, 
+  ExperienceFieldType, 
+  SkillsFieldType } from '~/types/types';
+  import dayjs, {Dayjs} from 'dayjs';
+  import { objEngRu } from './data';
+  import s from './section.module.scss';
 
 
 export interface IArrItems {
@@ -37,6 +36,8 @@ type FormType = {
 }
 
 
+
+
 const Section = <K extends keyof FormType>({ id, name }: ISection) => {
 
   const { Item } = Form;
@@ -44,7 +45,7 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
   const { RangePicker } = DatePicker;
   const dispatch = useAppDispatch();
 
-  const isSimple = name === 'experience' || name === 'education' ? false : true;
+  const isSimple = (name === 'experience' || name === 'education') ? false : true;
 
   const objGetArray = {
     'experience': arrExperience,
@@ -55,8 +56,6 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
   }
   
 
-
-
   const onFinish: FormProps<T>['onFinish'] = (values) => {
     // console.log('values:', values);
   };
@@ -65,7 +64,7 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
     // console.log('Failed:', errorInfo);
   };
 
-  const onValuesChange: FormProps<T>['onValuesChange'] = (changedValues, allValues) => {
+  const onValuesChange: FormProps<Section>['onValuesChange'] = (changedValues, allValues) => {
     // console.log('changedValues: ', changedValues); //конкретно измененное поле
 
     console.log('allValues (general): ', allValues)
@@ -75,18 +74,10 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
       allValues.period = [start, end];
     }
 
-
-
-    // if (name === 'experience') dispatch(updateExperience(allValues));
-    // if (name === 'education') dispatch(updateEducation(allValues));
-    // if (name === 'skills') dispatch(updateSkills(allValues));
-    // if (name === 'aboutme') dispatch(updateAboutme(allValues));
-    // if (name === 'certificates') dispatch(updateCertificates(allValues));
     dispatch(updateSection({id: id, type: name, ...allValues}))
   }
   const handleRemove = () => {
     console.log('name: ', name)
-    // dispatch(removeSection(name));
     dispatch(removeSection(id))
   }
 
@@ -106,10 +97,8 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
           if (field?.type === 'datepicker') child = <RangePicker format={'DD.MM.YYYY'}/>
           if (field?.type === 'textarea') child = <TextArea />
           return (<>
-            <Item<T>
+            <Item<K>
               label={isSimple ? '' : field?.label}
-
-              // label={field?.label}
               name={field?.name}>
                 {child}
             </Item>

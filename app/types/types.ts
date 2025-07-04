@@ -29,3 +29,4 @@ export interface CertificatesFieldType extends SectionBase {
   certificates?: string; 
 }
   // experience, education, skills, certificates, aboutme
+// 'experience' | 'education' | 'skills' | 'certificates' | 'aboutme'

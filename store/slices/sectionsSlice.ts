@@ -9,13 +9,17 @@ import type { ExperienceFieldType,
 
 
 
-type Section = ExperienceFieldType | EducationFieldType | SkillsFieldType | AboutmeFieldType | CertificatesFieldType;
+export type Section = 
+  ExperienceFieldType 
+  | EducationFieldType 
+  | SkillsFieldType 
+  | AboutmeFieldType 
+  | CertificatesFieldType;
 
 interface SectionsState {
   sections: Section[];
 }
 
-// 'experience' | 'education' | 'skills' | 'certificates' | 'aboutme'
 
 const initialState: SectionsState = {
   sections: [],

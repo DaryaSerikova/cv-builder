@@ -123,47 +123,19 @@ export function Welcome() {
           {sections && sections?.map((item) => {
             return <Section id={item.id} name={item?.type} />
           })}
-
-          {/* {sections && sections?.map((name) => {
-
-            return <Section name={name} />
-          })} */}
-{/* 
-          <Section name='experience' />
-          <Section name='education' />
-          <Section name='skills' />
-  
-          <Section name='aboutme' />
-          <Section name='certificates' />  */}
-
         </div>
 
 
         <div className={s.block}>
           {sections && sections?.map((section) => {
             console.log('section (preview): ', section)
-            return <SectionPreview 
-            name={section.type} 
-            data={section}
-            />
-            
-            // if (!mainState?.[`${section?.type}`]?.[`${section?.type}`]) return <></>
-            // else return <SectionPreview 
-            // name={section.type} 
-            // data={section}
-            // />
+            return <SectionPreview data={section}/>
           })}
           {/* {sections && sections?.map((section) => {
             if (!mainState?.[`${section}`]?.[`${section}`]) return <></>
             else return <SectionPreview name={section} />
           })} */}
 
-          {/* {experience && <SectionPreview name={'experience'} />}
-          {education && <SectionPreview name={'education'} />}
-          {skills && <SectionPreview name={'skills'} />}
-
-          {certificates && <SectionPreview name={'certificates'} />}
-          {aboutme && <SectionPreview name={'aboutme'} />} */}
 
         </div>
       </div>
