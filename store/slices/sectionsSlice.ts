@@ -1,39 +1,62 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import type { ExperienceFieldType, 
+  EducationFieldType, 
+  SkillsFieldType, 
+  AboutmeFieldType, 
+  CertificatesFieldType
+ } from '~/types/types';
 
 
 
-export type SectionsFieldType = {
-  // experience?: object,
-  // education?: object,
-  // skills?: object,
-  // certificates?: object,
-  // aboutme?: object,
-}
+type Section = ExperienceFieldType | EducationFieldType | SkillsFieldType | AboutmeFieldType | CertificatesFieldType;
 
 interface SectionsState {
-  sections: SectionsFieldType | null;
-  // 'experience' | 'education' | 'skills' | 'certificates' | 'aboutme'
+  sections: Section[];
 }
 
+// 'experience' | 'education' | 'skills' | 'certificates' | 'aboutme'
+
 const initialState: SectionsState = {
-  sections: null,
+  sections: [],
 };
 
-const experienceSlice = createSlice({
+const sectionsSlice = createSlice({
   name: 'sections',
   initialState,
   reducers: {
-    addSection(state, action: PayloadAction<SectionsFieldType>) {
-      // console.log("action.payload: ", action.payload)
-      state.sections = state.sections ? [...state.sections, action.payload] : [action.payload];
+    addSection: (state, action: PayloadAction<Section>) => {
+      state.sections.push(action.payload);
     },
-    removeSection(state, action: PayloadAction<SectionsFieldType>) {
-      console.log("action.payload (remove): ", action.payload)
-      state.sections = state?.sections?.filter((section) => section !== action.payload)
-    }
+    updateSection: (state, action: PayloadAction<Section>) => {
+      const index = state.sections.findIndex(s => s.id === action.payload.id);
+      if (index !== -1) {
+        state.sections[index] = action.payload;
+      }
+    },
+    removeSection: (state, action: PayloadAction<string>) => {
+      state.sections = state.sections.filter(s => s.id !== action.payload);
+    },
+    // reorderSections: (state, action: PayloadAction<{fromId: string, toId: string}>) => {
+    //   // Логика перетаскивания
+    //   const { fromId, toId } = action.payload;
+    //   const fromIndex = state.sections.findIndex(s => s.id === fromId);
+    //   const toIndex = state.sections.findIndex(s => s.id === toId);
+      
+    //   if (fromIndex !== -1 && toIndex !== -1) {
+    //     const [moved] = state.sections.splice(fromIndex, 1);
+    //     state.sections.splice(toIndex, 0, moved);
+        
+    //     // Обновляем порядок
+    //     state.sections.forEach((section, index) => {
+    //       section.order = index;
+    //     });
+    //   }
+    // },
   },
 });
 
-export const { addSection, removeSection } = experienceSlice.actions;
-export default experienceSlice.reducer;
+export const { addSection, updateSection, removeSection
+  // reorderSections 
+} = sectionsSlice.actions;
+export default sectionsSlice.reducer;

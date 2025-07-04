@@ -6,6 +6,7 @@ import SectionPreview from '~/components/sectionPreview/sectionPreview';
 import { useAppSelector } from 'store/hooks';
 import { useState } from 'react';
 import { useAppDispatch } from 'store/hooks';
+import { updateCurrentId } from 'store/slices/currentIdSlice';
 import { addSection } from 'store/slices/sectionsSlice';
 
 type FieldType = {
@@ -15,24 +16,34 @@ type FieldType = {
 
 export function Welcome() {
   const [section, setSection] = useState(null);
+
   const mainState = useAppSelector((state) => state);
   const experience = useAppSelector((state) => state.experience?.experience);
   const education = useAppSelector((state) => state.education?.education);
   const skills = useAppSelector((state) => state.skills?.skills);
   const aboutme = useAppSelector((state) => state.aboutme?.aboutme);
   const certificates = useAppSelector((state) => state.certificates?.certificates);
+  const sections = useAppSelector((state) => state.sections?.sections);
+
   const dispatch = useAppDispatch();
 
-  const sections = useAppSelector((state) => state.sections?.sections);
+  const currentId = useAppSelector((state) => state.currentId)
+
+
+
   console.log('sections (redux): ', sections)
-  console.log("mainState: ", mainState)
+  // console.log("mainState: ", mainState)
 
 
   const { Item } = Form;
 
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
     // console.log('Success:', values);
-    dispatch(addSection(section));
+    // dispatch(addSection(section)); 
+    // console.log('---onFinish---')
+    dispatch(addSection({'id': currentId, 'type': section})) // 
+    dispatch(updateCurrentId(currentId + 1));
+
   };
   
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
@@ -40,7 +51,7 @@ export function Welcome() {
   };
 
   const handleChange = (value: string) => {
-    // console.log(`selected ${value}`);
+    // console.log(`selected ${value}`); 
     setSection(value);
   };
 
@@ -108,10 +119,15 @@ export function Welcome() {
               <Button htmlType="submit">Добавить секцию</Button>
             </Item>
           </Form>
-          {sections && sections?.map((name) => {
+
+          {sections && sections?.map((item) => {
+            return <Section id={item.id} name={item?.type} />
+          })}
+
+          {/* {sections && sections?.map((name) => {
 
             return <Section name={name} />
-          })}
+          })} */}
 {/* 
           <Section name='experience' />
           <Section name='education' />
@@ -125,9 +141,22 @@ export function Welcome() {
 
         <div className={s.block}>
           {sections && sections?.map((section) => {
+            console.log('section (preview): ', section)
+            return <SectionPreview 
+            name={section.type} 
+            data={section}
+            />
+            
+            // if (!mainState?.[`${section?.type}`]?.[`${section?.type}`]) return <></>
+            // else return <SectionPreview 
+            // name={section.type} 
+            // data={section}
+            // />
+          })}
+          {/* {sections && sections?.map((section) => {
             if (!mainState?.[`${section}`]?.[`${section}`]) return <></>
             else return <SectionPreview name={section} />
-          })}
+          })} */}
 
           {/* {experience && <SectionPreview name={'experience'} />}
           {education && <SectionPreview name={'education'} />}

@@ -1,12 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, current } from '@reduxjs/toolkit';
 // import authReducer from './slices/authSlice';
 import experienceSlice from './slices/experienceSlice';
 import educationSlice from './slices/educationSlice';
-import resumeSlice from './slices/resumeSlice';
 import skillsSlice from './slices/skillsSlice'
 import sectionsSlice from './slices/sectionsSlice';
 import aboutmeSlice from './slices/aboutmeSlice';
 import certificatesSlice from './slices/certificatesSlice';
+import currentIdSlice from './slices/currentIdSlice'
 
 export const store = configureStore({
   reducer: {
@@ -15,8 +15,8 @@ export const store = configureStore({
     skills: skillsSlice,
     aboutme: aboutmeSlice,
     certificates: certificatesSlice,
-    // resume: resumeSlice,
     sections: sectionsSlice,
+    currentId: currentIdSlice,
   },
 });
 

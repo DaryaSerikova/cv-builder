@@ -1,19 +1,20 @@
 import React from 'react';
-import { Select, Button, Form, Input, DatePicker } from 'antd';
+import { Button, Form, Input, DatePicker } from 'antd';
 import type { FormProps } from 'antd';
 import s from './section.module.scss';
 import { useAppDispatch } from 'store/hooks';
-import { updateExperience } from 'store/slices/experienceSlice';
-import { updateEducation } from 'store/slices/educationSlice';
-import { updateSkills } from 'store/slices/skillsSlice';
+// import { updateExperience } from 'store/slices/experienceSlice';
+// import { updateEducation } from 'store/slices/educationSlice';
+// import { updateSkills } from 'store/slices/skillsSlice';
+// import { updateAboutme } from 'store/slices/aboutmeSlice';
+// import { updateCertificates } from 'store/slices/certificatesSlice';
 import { arrAboutme, arrCertificates, arrEducation, arrExperience, arrSkills } from './data';
 import type { AboutmeFieldType, CertificatesFieldType, 
   EducationFieldType, ExperienceFieldType, SkillsFieldType } from '~/types/types';
 import dayjs, {Dayjs} from 'dayjs';
 import { objEngRu } from './data';
-import { updateAboutme } from 'store/slices/aboutmeSlice';
-import { updateCertificates } from 'store/slices/certificatesSlice';
-import { removeSection } from 'store/slices/sectionsSlice';
+// import { removeSection } from 'store/slices/sectionsSlice';
+import { removeSection, updateSection } from 'store/slices/sectionsSlice';
 
 
 export interface IArrItems {
@@ -22,8 +23,8 @@ export interface IArrItems {
   type: 'input' | 'datepicker' | 'textarea';
 }
 
-// interface ISection<T> {
 interface ISection {
+  id: number;
   name: 'experience' | 'education' | 'skills' | 'aboutme' | 'certificates';
 }
 
@@ -36,8 +37,7 @@ type FormType = {
 }
 
 
-// const Section = <T,>({ name }: ISection<T>) => {
-const Section = <K extends keyof FormType>({ name }: ISection) => {
+const Section = <K extends keyof FormType>({ id, name }: ISection) => {
 
   const { Item } = Form;
   const { TextArea } = Input;
@@ -53,7 +53,6 @@ const Section = <K extends keyof FormType>({ name }: ISection) => {
     'aboutme': arrAboutme,
     'certificates': arrCertificates,
   }
-  // experience, education, skills, certificates, aboutme
   
 
 
@@ -67,7 +66,7 @@ const Section = <K extends keyof FormType>({ name }: ISection) => {
   };
 
   const onValuesChange: FormProps<T>['onValuesChange'] = (changedValues, allValues) => {
-    console.log('changedValues: ', changedValues); //конкретно измененное поле
+    // console.log('changedValues: ', changedValues); //конкретно измененное поле
 
     console.log('allValues (general): ', allValues)
     if (allValues?.period) {
@@ -77,15 +76,18 @@ const Section = <K extends keyof FormType>({ name }: ISection) => {
     }
 
 
-    if (name === 'experience') dispatch(updateExperience(allValues));
-    if (name === 'education') dispatch(updateEducation(allValues));
-    if (name === 'skills') dispatch(updateSkills(allValues));
-    if (name === 'aboutme') dispatch(updateAboutme(allValues));
-    if (name === 'certificates') dispatch(updateCertificates(allValues));
+
+    // if (name === 'experience') dispatch(updateExperience(allValues));
+    // if (name === 'education') dispatch(updateEducation(allValues));
+    // if (name === 'skills') dispatch(updateSkills(allValues));
+    // if (name === 'aboutme') dispatch(updateAboutme(allValues));
+    // if (name === 'certificates') dispatch(updateCertificates(allValues));
+    dispatch(updateSection({id: id, type: name, ...allValues}))
   }
   const handleRemove = () => {
     console.log('name: ', name)
-    dispatch(removeSection(name));
+    // dispatch(removeSection(name));
+    dispatch(removeSection(id))
   }
 
   return (
