@@ -2,8 +2,8 @@ import React from 'react';
 import { Button, Form, Input, DatePicker } from 'antd';
 import type { FormProps } from 'antd';
 import { useAppDispatch } from 'store/hooks';
-import { removeSection, updateSection } from 'store/slices/sectionsSlice';
-import type { Section } from 'store/slices/sectionsSlice';
+
+
 import { arrAboutme, arrCertificates, arrEducation, arrExperience, arrSkills } from './data';
 import type { 
   AboutmeFieldType, 
@@ -14,6 +14,8 @@ import type {
   import dayjs, {Dayjs} from 'dayjs';
   import { objEngRu } from './data';
   import s from './section.module.scss';
+// import { updateSection } from 'store/slices/sectionsSlice2';
+import { updateSection, removeSection } from 'store/slices/sectionsSlice';
 
 
 export interface IArrItems {
@@ -74,11 +76,12 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
       allValues.period = [start, end];
     }
 
-    dispatch(updateSection({id: id, type: name, ...allValues}))
+    dispatch(updateSection({id: id, type: name, ...allValues})) //sectionsSlice
+    // dispatch(updateSection({id: id, type: name, ...allValues}));
   }
   const handleRemove = () => {
     console.log('name: ', name)
-    dispatch(removeSection(id))
+    dispatch(removeSection(id)) //sectionsSlice
   }
 
   return (
@@ -89,6 +92,11 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         onValuesChange={onValuesChange}
+        onMouseDown={(e) => { //dnd
+          if (e.target instanceof HTMLInputElement) {
+            e.stopPropagation();
+          }
+        }}
       >
 
         <div className={s.name}>{objEngRu[`${name}`].ru}</div>
@@ -98,6 +106,7 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
           if (field?.type === 'textarea') child = <TextArea />
           return (<>
             <Item<K>
+              data-no-drag
               label={isSimple ? '' : field?.label}
               name={field?.name}>
                 {child}

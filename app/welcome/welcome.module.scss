@@ -1,8 +1,50 @@
 .page {
   background-color: white;
-  height: 100vh;
+  color: black;
+  min-height: 100vh;
+  // width: 100%;
+  flex: 1;
 
   padding: 30px 8%;
+  transition: padding 0.2s;
+
+
+  @media (min-width: 1080px) and (max-width: 1280px) {
+    padding: 25px 6%;
+    transition: padding 0.2s;
+  }
+  @media (min-width: 768px) and (max-width: 1080px) {
+    padding: 20px 4%;
+    transition: padding 0.2s;
+
+  }
+  @media (max-width: 768px) {
+    padding: 15px 10px;
+    transition: padding 0.2s;
+
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(213, 213, 213);
+
+    box-shadow: 0px 18px 20px rgb(141, 141, 141);
+    padding: 30px;
+    margin-bottom: 30px;
+    font-size: 35px;
+
+    @media (max-width: 768px) {
+    box-shadow: 0px 10px 20px rgb(141, 141, 141);
+
+      padding: 20px;
+      margin-bottom: 25px;
+      font-size: 25px;
+    }
+  }
   .container {
     background-color: white;
     height: fit-content;
@@ -11,16 +53,137 @@
     flex-direction: row;
     justify-content: space-between;
     gap: 20px;
+    transition: gap 0.3s;
+
+    @media (max-width: 1080px) {
+      gap: 10px;
+      transition: gap 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      gap: 8px;
+      transition: gap 0.3s;
+    }
+
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+      gap: 10px;
+      transition: gap 0.3s;
+
+    }
+
 
     .block {
-      background-color: rgb(246, 246, 246);
-      width: 100%;
+      // background-color: rgb(246, 246, 246);
+      // width: 100%;
+      width: 50%;
+
       padding: 30px;
 
       display: flex;
       flex-direction: column;
       gap: 10px;
 
+      @media (min-width: 768px) and (max-width: 1080px) {
+        padding: 12px;
+        transition: padding 0.3s;
+      }
+      @media (min-width: 450px) and (max-width: 768px) {
+        padding: 5px;
+        transition: padding 0.3s;
+      }
+      @media (max-width: 500px) {
+        width: 100%;
+      }
+      @media (max-width: 450px) {
+        padding: 5px;
+      }
+
+      .previewHeader {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 21px;
+        background-color: rgb(242, 242, 242);
+
+        @media (min-width: 768px) and (max-width: 1080px) {
+          font-size: 25px;
+        }
+
+        @media (max-width: 768px) {
+          padding: 19px;
+          transition: padding 0.3s;
+        }
+      }
+
+      .resumeList {
+        display: flex;
+        flex-direction: column;
+        padding: 25px 20px;
+        box-shadow: 5px 5px 15px rgba(189, 189, 189, 0.5);
+        gap: 12px;
+
+      }
+      .addSection {
+        padding: 20px 0;
+
+        :global {
+          .ant-form {
+            display: flex;
+            flex-direction: row;
+            // justify-content: space-between;
+            // justify-content: space-around;
+            justify-content: center;
+            align-items: center;
+            // display: grid;
+            // grid-template-columns: 1fr 1fr;
+            gap: 10px;
+
+            .ant-form-item {
+              width: fit-content;
+              margin-bottom: 0;
+              // width: 100%;
+  
+              .ant-row {
+                width: fit-content;
+                // width: 100%;
+
+  
+                .ant-form-item-control {
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: center;
+                  // flex: 0;
+                  flex: 1;
+                  // width: 100%;
+
+                }
+                .ant-col-16 {
+                  max-width: 100%;
+                }
+              }
+            }
+
+            .ant-btn {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    .fixed {
+      position: fixed;
+      right: 0;
+      // width: 50%;
+
+      @media (max-width: 500px) {
+        display: flex;
+        position: static;
+        width: 100%;
+      }
     }
   }
 

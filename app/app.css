@@ -12,4 +12,28 @@ body {
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+  width: 100%;
+  /* width: 100vw; */
+
+}
+
+@media (max-width: 500px) {
+  html, body {
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  body {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  main, .content {
+    flex: 1 !important;
+    width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+}
+
+body {
+  width: 100vw;
 }

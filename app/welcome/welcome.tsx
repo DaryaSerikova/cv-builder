@@ -6,8 +6,14 @@ import SectionPreview from '~/components/sectionPreview/sectionPreview';
 import { useAppSelector } from 'store/hooks';
 import { useState } from 'react';
 import { useAppDispatch } from 'store/hooks';
+
+import { SectionsList } from '~/components/dnd/dndComponent';
+
+// import { addSection, selectAllSections } from 'store/slices/sectionsSlice2';//
 import { updateCurrentId } from 'store/slices/currentIdSlice';
 import { addSection } from 'store/slices/sectionsSlice';
+
+
 
 type FieldType = {
   section?: string;
@@ -18,20 +24,20 @@ export function Welcome() {
   const [section, setSection] = useState(null);
 
   const mainState = useAppSelector((state) => state);
-  const experience = useAppSelector((state) => state.experience?.experience);
-  const education = useAppSelector((state) => state.education?.education);
-  const skills = useAppSelector((state) => state.skills?.skills);
-  const aboutme = useAppSelector((state) => state.aboutme?.aboutme);
-  const certificates = useAppSelector((state) => state.certificates?.certificates);
   const sections = useAppSelector((state) => state.sections?.sections);
-
+  const currentId = useAppSelector((state) => state.currentId)
   const dispatch = useAppDispatch();
 
-  const currentId = useAppSelector((state) => state.currentId)
+
+  // console.log('sections: ', sections)
+  // console.log('ids: ', ids)
+
+  // const arrSections = Object.values(sections);
 
 
 
-  console.log('sections (redux): ', sections)
+
+  // console.log('sections (redux): ', sections)
   // console.log("mainState: ", mainState)
 
 
@@ -39,10 +45,13 @@ export function Welcome() {
 
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
     // console.log('Success:', values);
-    // dispatch(addSection(section)); 
-    // console.log('---onFinish---')
-    dispatch(addSection({'id': currentId, 'type': section})) // 
-    dispatch(updateCurrentId(currentId + 1));
+    dispatch(addSection({'id': currentId, 'type': section})) // sectionsSlice
+    dispatch(updateCurrentId(currentId + 1)); // sectionsSlice
+
+    
+    // dispatch(addSection({'id': currentId, 'type': section}));
+    // dispatch(updateCurrentId(currentId + 1)); 
+    
 
   };
   
@@ -86,51 +95,67 @@ export function Welcome() {
 
   return (
     <main className={s.page}>
+      <header className={s.header}>
+        RESUME BUILDER
+      </header>
       <div className={s.container}>
+
+
         <div className={s.block}>
 
-          <Form
-              name="basic"
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              style={{ maxWidth: 600 }}
-              initialValues={{ remember: true }}
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
-              autoComplete="off"
-            >
-            <Item<FieldType>
-              label="section"
-              name="section">
-                <Select
-                  defaultValue='Тип секции'
-                  style={{ width: 150 }}
-                  onChange={handleChange} //Опыт, Образование, Навыки, Сертификаты, О себе.
-                  options={[
-                    { value: 'experience', label: 'Опыт' },
-                    { value: 'education', label: 'Образование' },
-                    { value: 'skills', label: 'Навыки' },
-                    { value: 'certificates', label: 'Сертификаты' },
-                    { value: 'aboutme', label: 'О себе'},
-                  ]}
-                />
-            </Item>
-            <Item label={null}>
-              <Button htmlType="submit">Добавить секцию</Button>
-            </Item>
-          </Form>
 
           {sections && sections?.map((item) => {
             return <Section id={item.id} name={item?.type} />
           })}
+          {/* <SectionsList /> */}
+
+          <div className={s.addSection}>
+            <Form
+                name="basic"
+                // layout="vertical"
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+                // style={{ maxWidth: 600 }}
+                initialValues={{ remember: true }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+              >
+              <Item<FieldType>
+                label=""
+                name="section">
+                  <Select
+                    defaultValue='Тип секции'
+                    style={{ width: 150 }}
+                    onChange={handleChange} //Опыт, Образование, Навыки, Сертификаты, О себе.
+                    options={[
+                      { value: 'experience', label: 'Опыт' },
+                      { value: 'education', label: 'Образование' },
+                      { value: 'skills', label: 'Навыки' },
+                      { value: 'certificates', label: 'Сертификаты' },
+                      { value: 'aboutme', label: 'О себе'},
+                    ]}
+                  />
+              </Item>
+              <Button htmlType="submit">Добавить секцию</Button>
+            </Form>
+          </div>
         </div>
 
 
-        <div className={s.block}>
-          {sections && sections?.map((section) => {
-            console.log('section (preview): ', section)
-            return <SectionPreview data={section}/>
-          })}
+        <div className={`${s.block} ${s.fixed}`}>
+          <div className={s.previewHeader}>
+            Live View
+          </div>
+          <div className={s.resumeList}>
+            {sections && sections?.map((item) => { //рабочая версия
+              console.log('section (preview): ', item)
+              return <SectionPreview data={item}/>
+            })}
+          </div>
+
+
+
           {/* {sections && sections?.map((section) => {
             if (!mainState?.[`${section}`]?.[`${section}`]) return <></>
             else return <SectionPreview name={section} />

@@ -9,7 +9,7 @@ const currentIdSlice = createSlice({
   name: 'currentId',
   initialState,
   reducers: {
-    updateCurrentId(state, action) {
+    updateCurrentId(state, action: PayloadAction<number>) {
       return action.payload;
     },
   },

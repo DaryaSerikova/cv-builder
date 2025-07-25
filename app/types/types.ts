@@ -28,5 +28,12 @@ export interface AboutmeFieldType extends SectionBase {
 export interface CertificatesFieldType extends SectionBase {
   certificates?: string; 
 }
+
+export type TSection =  ///TSection второй в sectionSlice2
+  ExperienceFieldType 
+  | EducationFieldType 
+  | SkillsFieldType 
+  | AboutmeFieldType 
+  | CertificatesFieldType;
   // experience, education, skills, certificates, aboutme
 // 'experience' | 'education' | 'skills' | 'certificates' | 'aboutme'

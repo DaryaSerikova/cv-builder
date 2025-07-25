@@ -1,5 +1,7 @@
 npm i @dnd-kit/core @dnd-kit/sortable
+npm install @dnd-kit/modifiers
 
+npm install @dnd-kit/utilities
 # Welcome to React Router!
 
 A modern, production-ready template for building full-stack React applications using React Router.
