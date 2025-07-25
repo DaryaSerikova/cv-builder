@@ -1,9 +1,6 @@
-import React from 'react';
 import { Button, Form, Input, DatePicker } from 'antd';
 import type { FormProps } from 'antd';
 import { useAppDispatch } from 'store/hooks';
-
-
 import { arrAboutme, arrCertificates, arrEducation, arrExperience, arrSkills } from './data';
 import type { 
   AboutmeFieldType, 
@@ -11,11 +8,11 @@ import type {
   EducationFieldType, 
   ExperienceFieldType, 
   SkillsFieldType } from '~/types/types';
-  import dayjs, {Dayjs} from 'dayjs';
-  import { objEngRu } from './data';
-  import s from './section.module.scss';
-// import { updateSection } from 'store/slices/sectionsSlice2';
+import { objEngRu } from './data';
+import s from './section.module.scss';
 import { updateSection, removeSection } from 'store/slices/sectionsSlice';
+
+
 
 
 export interface IArrItems {
@@ -36,8 +33,6 @@ type FormType = {
   aboutme: AboutmeFieldType,
   certificates: CertificatesFieldType,
 }
-
-
 
 
 const Section = <K extends keyof FormType>({ id, name }: ISection) => {
@@ -103,7 +98,7 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
         { objGetArray[`${name}`]?.map((field: IArrItems) => {
           let child = <Input></Input>;
           if (field?.type === 'datepicker') child = <RangePicker format={'DD.MM.YYYY'}/>
-          if (field?.type === 'textarea') child = <TextArea />
+          if (field?.type === 'textarea') child = <TextArea autoSize={{ minRows: 2, maxRows: 6 }}/>
           return (<>
             <Item<K>
               data-no-drag

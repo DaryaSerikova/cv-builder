@@ -2,62 +2,45 @@
   color: black;
   display: flex;
   flex-direction: column;
-  // gap: 30px;
   gap: 6px;
-
   transition: gap 0.3s;
 
   @media (min-width: 1280px) and (max-width: 1440px) {
-    // gap: 25px;
     gap: 5px;
   }
   @media (min-width: 1080px) and (max-width: 1280px) {
-    // gap: 20px;
     gap: 4px;
   }
   @media (min-width: 768px) and (max-width: 1080px) {
-    // gap: 15px;
     gap: 3px;
   }
-
   @media (max-width: 768px) {
-    // padding: 15px;
-    // gap: 10px;
     gap: 2px;
-
-    
-
-    transition: all 0.3s;
   }
 
   .name {
-    // font-size: 30px;
     font-size: 14px;
     font-weight: 600;
+    transition: font-size 0.3s;
 
     @media (min-width: 768px) and (max-width: 1080px) {
-      // font-size: 25px;
       font-size: 12px;
-      transition: font-size 0.3s;
     }
 
     @media (max-width: 768px) {
-      // font-size: 21px;
-      // font-size: 16px;
       font-size: 11px;
-      transition: font-size 0.3s;
     }
   }
 
   .body {
     display: flex;
     flex-direction: column;
-    // gap: 8px;
     gap: 2px;
 
 
     .field {
       font-size: 12px;
+      transition: font-size 0.3s;
 
       @media (min-width: 1280px) and (max-width: 1440px) {
         font-size: 11px;
@@ -74,9 +57,9 @@
       }
 
       .title {
-        // font-size: 11px;
         color: gray;
         font-size: 9px;
+        transition: font-size 0.3s;
 
         @media (min-width: 1280px) and (max-width: 1440px) {
           font-size: 8px;
@@ -93,8 +76,6 @@
         }
       }
       .text {
-        // font-size: 14px;
-
         .period {
           display: flex;
           flex-direction: row;

@@ -12,6 +12,7 @@ import { SectionsList } from '~/components/dnd/dndComponent';
 // import { addSection, selectAllSections } from 'store/slices/sectionsSlice2';//
 import { updateCurrentId } from 'store/slices/currentIdSlice';
 import { addSection } from 'store/slices/sectionsSlice';
+import { useEffect } from 'react';
 
 
 
@@ -28,13 +29,13 @@ export function Welcome() {
   const currentId = useAppSelector((state) => state.currentId)
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+  }, [sections]);
 
   // console.log('sections: ', sections)
   // console.log('ids: ', ids)
-
   // const arrSections = Object.values(sections);
-
-
 
 
   // console.log('sections (redux): ', sections)
@@ -48,11 +49,8 @@ export function Welcome() {
     dispatch(addSection({'id': currentId, 'type': section})) // sectionsSlice
     dispatch(updateCurrentId(currentId + 1)); // sectionsSlice
 
-    
     // dispatch(addSection({'id': currentId, 'type': section}));
     // dispatch(updateCurrentId(currentId + 1)); 
-    
-
   };
   
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
@@ -88,9 +86,6 @@ export function Welcome() {
       label: 'О себе'
     }
   ];
-
-
-
 
 
   return (

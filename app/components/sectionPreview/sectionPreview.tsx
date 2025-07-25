@@ -29,10 +29,6 @@ const SectionPreview = ({ data }: ISectionPreview) => {
           ? <p className={s.period}><p>{field?.[1][0]}</p> - <p>{field?.[1][1]}</p></p>
           : <>{field?.[1]}</>;
 
-          // return(<>
-          //     <div className={s.item}>{nameField}</div>
-          //     <div className={s.item}>{dataNode}</div>
-          //   </>)
           return(<div className={s.field}>
             <div className={s.title}>{nameField}</div>
             <div className={s.text}>{dataNode}</div>
