@@ -78,7 +78,6 @@ export function Welcome() {
     },
     {
       key: '4',
-      // danger: true,
       label: 'Сертификаты',
     },
     {
@@ -98,19 +97,16 @@ export function Welcome() {
 
         <div className={s.block}>
 
-
-          {sections && sections?.map((item) => {
+          {/* {sections && sections?.map((item) => {
             return <Section id={item.id} name={item?.type} />
-          })}
-          {/* <SectionsList /> */}
+          })} */}
+          <SectionsList />
 
           <div className={s.addSection}>
             <Form
                 name="basic"
-                // layout="vertical"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
-                // style={{ maxWidth: 600 }}
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
@@ -122,7 +118,7 @@ export function Welcome() {
                   <Select
                     defaultValue='Тип секции'
                     style={{ width: 150 }}
-                    onChange={handleChange} //Опыт, Образование, Навыки, Сертификаты, О себе.
+                    onChange={handleChange}
                     options={[
                       { value: 'experience', label: 'Опыт' },
                       { value: 'education', label: 'Образование' },
@@ -144,18 +140,10 @@ export function Welcome() {
           </div>
           <div className={s.resumeList}>
             {sections && sections?.map((item) => { //рабочая версия
-              console.log('section (preview): ', item)
+              // console.log('section (preview): ', item)
               return <SectionPreview data={item}/>
             })}
           </div>
-
-
-
-          {/* {sections && sections?.map((section) => {
-            if (!mainState?.[`${section}`]?.[`${section}`]) return <></>
-            else return <SectionPreview name={section} />
-          })} */}
-
 
         </div>
       </div>

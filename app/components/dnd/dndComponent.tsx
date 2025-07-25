@@ -9,14 +9,22 @@ import { CSS } from '@dnd-kit/utilities';
 // import type Section from '../section/section';
 import Section from '../section/section';
 import { reorderSections } from 'store/slices/sectionsSlice';
+import { useEffect } from 'react';
+import s from './dndComponent.module.scss'
+
+
 
 const DraggableSection = ({ id }: { id: string }) => {
   // const section = useAppSelector(selectSectionById(id));
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id });
+  const { setNodeRef: setDroppableRef } = useDroppable({ id: id });
   const sections = useAppSelector((state) => state?.sections?.sections);
   const section = sections?.filter((item) => item.id === id)[0];
 
-  
+  useEffect(() => {
+    console.log('id: ', id, ', section:', section);
+  }, [id])
+
   if (!section) return null;
 
 
@@ -30,14 +38,14 @@ const DraggableSection = ({ id }: { id: string }) => {
   // <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
 
   return (
-    <>
-    <div ref={setNodeRef} style={style} {...attributes}>
-    <div {...listeners} style={{cursor: 'grab', padding: '8px'}}>
-      <span>&equiv;</span>
+    <div ref={setDroppableRef} >
+      <div ref={setNodeRef} style={style} {...attributes} className={s.dndWrapper}>
+        <div {...listeners} className={s.dndIcon}>
+          <span>&equiv;</span>
+        </div>
+        <Section id={section?.id} name={section?.type} />
+      </div>
     </div>
-      <Section id={section?.id} name={section?.type} />
-    </div>
-    </>
   );
 };
 
@@ -46,15 +54,18 @@ export const SectionsList = () => {
   // const sectionIds = useAppSelector(selectSectionIds);
   const sectionIds = useAppSelector((state) => state?.sections?.ids);
 
-  const handleDragEnd = (event: any) => {
-    console.log('--- event: ', event)
-    const { active, over } = event;
+  console.log('sectionIds: ', sectionIds);
 
-    if(!over || active.id === over.id) return
-    // if (active.id !== over.id) {
+  const handleDragEnd = (event: any) => {
+    console.log('--- event ending: ', event)
+    const { active, over } = event;
+    console.log('active: ', active, ', over: ', over)
+
+    // if(!over || active.id === over.id) return
+    if (active.id !== over.id) {
 
       dispatch(reorderSections({ activeId: active?.id, overId: over?.id }));
-    // }
+    }
   };
 
   return (
@@ -64,7 +75,9 @@ export const SectionsList = () => {
     >
       <SortableContext items={sectionIds} strategy={verticalListSortingStrategy}>
         {sectionIds.map(id => (
+          // <DraggableSection key={id} id={`${id}`} />
           <DraggableSection key={id} id={id} />
+
         ))}
       </SortableContext>
     </DndContext>
