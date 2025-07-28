@@ -1,24 +1,17 @@
-import s from './welcome.module.scss';
+import { useState, useEffect } from 'react';
 import type { MenuProps, FormProps } from 'antd';
 import { Select, Button, Form } from 'antd';
-import Section from '~/components/section/section';
 import SectionPreview from '~/components/sectionPreview/sectionPreview';
-import { useAppSelector } from 'store/hooks';
-import { useState } from 'react';
-import { useAppDispatch } from 'store/hooks';
-
 import { SectionsList } from '~/components/dnd/dndComponent';
-
-// import { addSection, selectAllSections } from 'store/slices/sectionsSlice2';//
+import { useAppSelector,  useAppDispatch } from 'store/hooks';
 import { updateCurrentId } from 'store/slices/currentIdSlice';
 import { addSection } from 'store/slices/sectionsSlice';
-import { useEffect } from 'react';
+import s from './welcome.module.scss';
 
 
 
 type FieldType = {
   section?: string;
-
 };
 
 export function Welcome() {
@@ -33,24 +26,15 @@ export function Welcome() {
     window.scrollTo(0, document.body.scrollHeight);
   }, [sections]);
 
-  // console.log('sections: ', sections)
-  // console.log('ids: ', ids)
-  // const arrSections = Object.values(sections);
-
-
-  // console.log('sections (redux): ', sections)
-  // console.log("mainState: ", mainState)
+  console.log("state.sections: ", mainState?.sections)
 
 
   const { Item } = Form;
 
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
     // console.log('Success:', values);
-    dispatch(addSection({'id': currentId, 'type': section})) // sectionsSlice
-    dispatch(updateCurrentId(currentId + 1)); // sectionsSlice
-
-    // dispatch(addSection({'id': currentId, 'type': section}));
-    // dispatch(updateCurrentId(currentId + 1)); 
+    dispatch(addSection({'id': currentId, 'type': section})) 
+    dispatch(updateCurrentId(currentId + 1)); 
   };
   
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
@@ -74,7 +58,6 @@ export function Welcome() {
     {
       key: '3',
       label: 'Навыки',
-      // disabled: true,
     },
     {
       key: '4',
@@ -140,7 +123,6 @@ export function Welcome() {
           </div>
           <div className={s.resumeList}>
             {sections && sections?.map((item) => { //рабочая версия
-              // console.log('section (preview): ', item)
               return <SectionPreview data={item}/>
             })}
           </div>

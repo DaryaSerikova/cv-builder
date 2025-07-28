@@ -35,5 +35,6 @@ export type TSection =  ///TSection второй в sectionSlice2
   | SkillsFieldType 
   | AboutmeFieldType 
   | CertificatesFieldType;
+
   // experience, education, skills, certificates, aboutme
 // 'experience' | 'education' | 'skills' | 'certificates' | 'aboutme'

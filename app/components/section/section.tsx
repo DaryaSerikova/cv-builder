@@ -63,7 +63,6 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
 
   const onValuesChange: FormProps<Section>['onValuesChange'] = (changedValues, allValues) => {
     // console.log('changedValues: ', changedValues); //конкретно измененное поле
-
     // console.log('allValues (general): ', allValues)
     if (allValues?.period) {
       let [start, end] = allValues?.period;
@@ -72,10 +71,8 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
     }
 
     dispatch(updateSection({id: id, type: name, ...allValues})) //sectionsSlice
-    // dispatch(updateSection({id: id, type: name, ...allValues}));
   }
   const handleRemove = () => {
-    // console.log('name: ', name)
     dispatch(removeSection(id)) //sectionsSlice
   }
 

@@ -1,21 +1,16 @@
-// components/SectionsList/SectionsList.tsx
+import { useEffect } from 'react';
 import { useDraggable, useDroppable, DndContext } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { CSS } from '@dnd-kit/utilities';
-
-// import { selectSectionIds, selectSectionById, reorderSections } from 'store/slices/sectionsSlice2';
-// import type Section from '../section/section';
 import Section from '../section/section';
 import { reorderSections } from 'store/slices/sectionsSlice';
-import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
 import s from './dndComponent.module.scss'
 
 
 
 const DraggableSection = ({ id }: { id: string }) => {
-  // const section = useAppSelector(selectSectionById(id));
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id });
   const { setNodeRef: setDroppableRef } = useDroppable({ id: id });
   const sections = useAppSelector((state) => state?.sections?.sections);
@@ -35,7 +30,6 @@ const DraggableSection = ({ id }: { id: string }) => {
     cursor: 'grab',
   };
 
-  // <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
 
   return (
     <div ref={setDroppableRef} >
@@ -51,19 +45,14 @@ const DraggableSection = ({ id }: { id: string }) => {
 
 export const SectionsList = () => {
   const dispatch = useAppDispatch();
-  // const sectionIds = useAppSelector(selectSectionIds);
   const sectionIds = useAppSelector((state) => state?.sections?.ids);
 
   console.log('sectionIds: ', sectionIds);
 
   const handleDragEnd = (event: any) => {
-    console.log('--- event ending: ', event)
     const { active, over } = event;
-    console.log('active: ', active, ', over: ', over)
 
-    // if(!over || active.id === over.id) return
     if (active.id !== over.id) {
-
       dispatch(reorderSections({ activeId: active?.id, overId: over?.id }));
     }
   };
@@ -75,7 +64,6 @@ export const SectionsList = () => {
     >
       <SortableContext items={sectionIds} strategy={verticalListSortingStrategy}>
         {sectionIds.map(id => (
-          // <DraggableSection key={id} id={`${id}`} />
           <DraggableSection key={id} id={id} />
 
         ))}
