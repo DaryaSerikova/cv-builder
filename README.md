@@ -2,7 +2,39 @@ npm i @dnd-kit/core @dnd-kit/sortable
 npm install @dnd-kit/modifiers
 
 npm install @dnd-kit/utilities
-# Welcome to React Router!
+# Визуальный редактор резюме с секциями и превью
+
+### Описание:
+Минимальный визуальный редактор резюме с возможностью добавлять,
+удалять и редактировать секции (опыт, образование, навыки и т.д.) с моментальным
+превью в правой части экрана.
+
+### Cтэк
+React Router 7 (React) 
+TypeScript
+Redux-toolkit
+HTML
+SCSS-modules
+Ant Design
+Vite
+dnd-kit (Drag and Drop)
+
+# Start
+
+Команда для запуска: npm run dev
+
+![Иллюстрация к проекту](https://github.com/jon/coolproject/raw/master/image/image.png)
+
+![Выбор типа секции](https://github.com/DaryaSerikova/cv-builder/raw/dev/public/picture1.jpg)
+
+
+
+
+uninstall dayjs
+----
+
+
+
 
 A modern, production-ready template for building full-stack React applications using React Router.
 

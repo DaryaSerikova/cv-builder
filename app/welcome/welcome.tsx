@@ -16,6 +16,7 @@ type FieldType = {
 
 export function Welcome() {
   const [section, setSection] = useState(null);
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   const mainState = useAppSelector((state) => state);
   const sections = useAppSelector((state) => state.sections?.sections);
@@ -44,6 +45,7 @@ export function Welcome() {
   const handleChange = (value: string) => {
     // console.log(`selected ${value}`); 
     setSection(value);
+    setIsDisabled(false);
   };
 
   const items: MenuProps['items'] = [
@@ -111,7 +113,10 @@ export function Welcome() {
                     ]}
                   />
               </Item>
-              <Button htmlType="submit">Добавить секцию</Button>
+              <Button 
+                htmlType="submit" 
+                disabled={isDisabled}
+              >Добавить секцию</Button>
             </Form>
           </div>
         </div>
