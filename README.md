@@ -60,36 +60,3 @@ npm i @dnd-kit/core @dnd-kit/sortable
 npm install @dnd-kit/modifiers
 
 npm install @dnd-kit/utilities
-
-
-----
-
-
-
-
-
-
-
-Install the dependencies:
-
-```bash
-npm install
-```
-
-### Development
-
-Start the development server with HMR:
-
-```bash
-npm run dev
-```
-
-kmjkkk
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
