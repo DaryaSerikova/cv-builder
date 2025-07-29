@@ -31,16 +31,24 @@ npm install @dnd-kit/utilities
 ![Выбор типа секции](https://github.com/DaryaSerikova/cv-builder/raw/dev/public/picture1.jpg)
 
 ### Добавляем секцию
+При добавлении каждой новой секции, окошко прокручивается до последней добавленной секции.
+Лист Live View зафиксирован и при прокрутке остается на месте.
+Информацию можно редактировать, добавлять, удалять
 ![Выбор типа секции](https://github.com/DaryaSerikova/cv-builder/raw/dev/public/picture2.jpg)
 
 ### При заполнении любой секций в live режиме справа в листок добавляется информация
 ![Выбор типа секции](https://github.com/DaryaSerikova/cv-builder/raw/dev/public/picture3.jpg)
 
-### Еще можно перемещать секции местами, если взять карточку за строчку со знаком <span>&equiv;</span>
-![Выбор типа секции](https://github.com/DaryaSerikova/cv-builder/raw/dev/public/picture4.jpg)
-![Выбор типа секции](https://github.com/DaryaSerikova/cv-builder/raw/dev/public/picture5.jpg)
+### Еще можно перемещать секции местами, если взять курсором карточку строчку со знаком <span>&equiv;</span>
+Функция drag and Drop
 
-### И, конечно, удаление любой из карточек.
+Берем нужную нам секцию и меняем ее местами с той секцией, над которой держим нашу.
+![Выбор типа секции](https://github.com/DaryaSerikova/cv-builder/raw/dev/public/picture4.jpg)
+
+После отпускам нашу секцию и наблюдаем изменения:
+- Карточки слева поменялись местами
+- И в Live View тоже изменился порядок секций
+![Выбор типа секции](https://github.com/DaryaSerikova/cv-builder/raw/dev/public/picture5.jpg)
 
 Любые изменения слева, моментально отображаются в листке справа.
 
