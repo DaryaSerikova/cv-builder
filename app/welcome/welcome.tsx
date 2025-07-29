@@ -6,8 +6,8 @@ import { SectionsList } from '~/components/dnd/dndComponent';
 import { useAppSelector,  useAppDispatch } from 'store/hooks';
 import { updateCurrentId } from 'store/slices/currentIdSlice';
 import { addSection } from 'store/slices/sectionsSlice';
-import s from './welcome.module.scss';
 import type { TSection } from '~/types/types';
+import s from './welcome.module.scss';
 
 
 
@@ -16,37 +16,32 @@ type FieldType = {
 };
 
 export function Welcome() {
-  const [section, setSection] = useState(null);
-  const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const [selectedSection, setSelectedSection] = useState<string>('education'); /*!!!*/
 
-  const mainState = useAppSelector((state) => state);
   const sections = useAppSelector((state) => state.sections?.sections);
   const currentId = useAppSelector((state) => state.currentId)
   const dispatch = useAppDispatch();
+  const { Item } = Form;
 
   useEffect(() => {
     window.scrollTo(0, document.body.scrollHeight);
   }, [sections]);
 
-  console.log("state.sections: ", mainState?.sections)
 
-
-  const { Item } = Form;
 
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    console.log('Success:', values);
-    dispatch(addSection({'id': currentId, 'type': section})) 
+    // console.log('Success:', values);
+    dispatch(addSection({id: currentId, type: selectedSection})) /*!!!*/
     dispatch(updateCurrentId(currentId + 1)); 
   };
   
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
-    // console.log('Failed:', errorInfo);
+    console.log('Failed:', errorInfo);
   };
 
   const handleChange = (value: string) => {
-    // console.log(`selected ${value}`); 
-    setSection(value);
-    setIsDisabled(false);
+    setSelectedSection(value);
+    // setIsDisabled(false);
   };
 
   const items: MenuProps['items'] = [
@@ -80,12 +75,7 @@ export function Welcome() {
       </header>
       <div className={s.container}>
 
-
         <div className={s.block}>
-
-          {/* {sections && sections?.map((item) => {
-            return <Section id={item.id} name={item?.type} />
-          })} */}
           <SectionsList />
 
           <div className={s.addSection}>
@@ -94,7 +84,6 @@ export function Welcome() {
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
                 initialValues={{ section: 'education' }}
-                defaultValue={''}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
@@ -103,7 +92,8 @@ export function Welcome() {
                 label=""
                 name="section">
                   <Select
-                    defaultValue='Тип секции'
+                    defaultValue={'education'}
+                    value={selectedSection} 
                     onChange={handleChange}
                     options={[
                       { value: 'experience', label: 'Опыт' },
@@ -116,7 +106,7 @@ export function Welcome() {
               </Item>
               <Button 
                 htmlType="submit" 
-                disabled={isDisabled}
+                // disabled={isDisabled}
               >Добавить секцию</Button>
             </Form>
           </div>
@@ -128,7 +118,7 @@ export function Welcome() {
             Live View
           </div>
           <div className={s.resumeList}>
-            {sections && sections?.map((item: TSection) => { //рабочая версия
+            {sections && sections?.map((item: TSection) => { 
               return <SectionPreview data={item} key={item.id}/>
             })}
           </div>

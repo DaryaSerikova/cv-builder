@@ -67,12 +67,10 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
   };
   
   const onFinishFailed: FormProps['onFinishFailed'] = (errorInfo) => {
-    // console.log('Failed:', errorInfo);
+    console.log('Failed:', errorInfo);
   };
 
   const onValuesChange: FormProps['onValuesChange'] = (changedValues, allValues) => {
-    // console.log('changedValues: ', changedValues); //конкретно измененное поле
-    // console.log('allValues (general): ', allValues)
     if (allValues?.period) {
       let [start, end] = allValues?.period;
       [start, end] = [start.format('DD.MM.YYYY'), end.format('DD.MM.YYYY')]
@@ -85,8 +83,6 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
     dispatch(removeSection(id))
   }
 
-  console.log('name: ', name);
-  // console.log('objEngRu[`${name}`].ru: ', objEngRu[`${name}`].ru)
 
   return (
     <article className={s.section}>

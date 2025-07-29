@@ -74,29 +74,21 @@
 
 
     .block {
-      width: 50%;
-      padding: 30px;
-
+      width: 46%;
+      padding-top: 15px;
       display: flex;
       flex-direction: column;
       gap: 10px;
 
-
-      @media (min-width: 768px) and (max-width: 1080px) {
-        padding: 12px;
-        transition: padding 0.3s;
+      @media(min-width: 1280px) {
+        width: 45%;
       }
-      @media (min-width: 450px) and (max-width: 768px) {
-        padding: 5px;
-        transition: padding 0.3s;
+      @media (min-width: 500px) and (max-width: 768px) {
+        width: 48%;
       }
       @media (max-width: 500px) {
         width: 100%;
       }
-      @media (max-width: 450px) {
-        padding: 5px;
-      }
-
 
       .previewHeader {
         display: flex;
@@ -123,6 +115,13 @@
         box-shadow: 5px 5px 15px rgba(189, 189, 189, 0.5);
         gap: 12px;
         height: fit-content;
+
+        @media (min-width: 1280px) and (max-width: 1440px) {
+          padding: 30px 50px;
+        }
+        @media (min-width: 1440px) {
+          padding: 60px 70px;
+        }
       }
       .addSection {
         padding: 20px 0;
@@ -135,27 +134,62 @@
             align-items: center;
             gap: 10px;
 
+            @media (max-width: 350px) {
+              flex-direction: column;
+            }
+
             .ant-form-item {
               width: fit-content;
               margin-bottom: 0;
+
+              @media (max-width: 350px) {
+                width: 100%;
+              }
   
               .ant-row {
                 width: fit-content;
+
+                @media (max-width: 350px) {
+                  width: 100%;
+                }
   
                 .ant-form-item-control {
                   display: flex;
                   flex-direction: row;
                   justify-content: center;
                   flex: 1;
+
+                  @media (max-width: 350px) {
+                    width: 100%;
+                  }
+
+                  .ant-form-item-control-input {
+                    @media (max-width: 350px) {
+                      width: 100%;
+                    }
+                  }
                 }
                 .ant-col-16 {
                   max-width: 100%;
+
+                  @media (max-width: 350px) {
+                    width: 100%;
+                  }
                 }
 
                 .ant-select {
                   width: 150px;
 
-                  ////
+                  @media (max-width: 350px) {
+                    width: 100%;
+                  }
+
+                  .ant-select-selection-item {
+                    @media (max-width: 350px) {
+                      display: flex;
+                      justify-content: center;
+                    }
+                  }
                 }
               }
             }
@@ -170,7 +204,20 @@
 
     .fixed {
       position: fixed;
-      right: 0;
+      right: 4%;
+
+      // @media(min-width: 1280px) and (max-width: 1800px) {
+      @media(min-width: 1280px) {
+
+        right: 8%;
+      }
+      @media (min-width: 1080px) and (max-width: 1280px) {
+        right: 5.9%;
+      }
+
+      @media (min-width: 500px) and (max-width: 768px) {
+        right: 1.4%;
+      }
 
       @media (max-width: 500px) {
         display: flex;

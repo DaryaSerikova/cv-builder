@@ -10,16 +10,11 @@ import s from './dndComponent.module.scss'
 
 
 
-const DraggableSection = ({ id }: { id: string }) => {
+const DraggableSection = ({ id }: { id: number }) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id });
   const { setNodeRef: setDroppableRef } = useDroppable({ id: id });
   const sections = useAppSelector((state) => state?.sections?.sections);
   const section = sections?.filter((item) => +item.id === +id)[0];
-  console.log('section: ', section)
-
-  // useEffect(() => {
-  //   console.log('id: ', id, ', section:', section);
-  // }, [id])
 
   if (!section) return null;
 
@@ -47,8 +42,6 @@ const DraggableSection = ({ id }: { id: string }) => {
 export const SectionsList = () => {
   const dispatch = useAppDispatch();
   const sectionIds = useAppSelector((state) => state?.sections?.ids);
-
-  console.log('sectionIds: ', sectionIds);
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
