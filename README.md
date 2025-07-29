@@ -10,22 +10,43 @@ npm install @dnd-kit/utilities
 превью в правой части экрана.
 
 ### Cтэк
-React Router 7 (React) 
-TypeScript
-Redux-toolkit
-HTML
-SCSS-modules
-Ant Design
-Vite
-dnd-kit (Drag and Drop)
+- React Router 7 (React) 
+- TypeScript
+- Redux-toolkit
+- HTML
+- SCSS-modules
+- Ant Design
+- Vite
+- dnd-kit (Drag and Drop)
 
 # Start
 
 Команда для запуска: npm run dev
 
-![Иллюстрация к проекту](https://github.com/jon/coolproject/raw/master/image/image.png)
 
+# Визуальное представление 
+
+
+### Выбираем тип секции
 ![Выбор типа секции](https://github.com/DaryaSerikova/cv-builder/raw/dev/public/picture1.jpg)
+
+### Добавляем секцию
+![Выбор типа секции](https://github.com/DaryaSerikova/cv-builder/raw/dev/public/picture2.jpg)
+
+### При заполнении любой секций в live режиме справа в листок добавляется информация
+![Выбор типа секции](https://github.com/DaryaSerikova/cv-builder/raw/dev/public/picture3.jpg)
+
+### Еще можно перемещать секции местами, если взять карточку за строчку со знаком <span>&equiv;</span>
+![Выбор типа секции](https://github.com/DaryaSerikova/cv-builder/raw/dev/public/picture4.jpg)
+![Выбор типа секции](https://github.com/DaryaSerikova/cv-builder/raw/dev/public/picture5.jpg)
+
+### И, конечно, удаление любой из карточек.
+
+Любые изменения слева, моментально отображаются в листке справа.
+
+
+
+
 
 
 
