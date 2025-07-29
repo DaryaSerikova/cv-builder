@@ -7,6 +7,7 @@ import { useAppSelector,  useAppDispatch } from 'store/hooks';
 import { updateCurrentId } from 'store/slices/currentIdSlice';
 import { addSection } from 'store/slices/sectionsSlice';
 import s from './welcome.module.scss';
+import type { TSection } from '~/types/types';
 
 
 
@@ -33,7 +34,7 @@ export function Welcome() {
   const { Item } = Form;
 
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    // console.log('Success:', values);
+    console.log('Success:', values);
     dispatch(addSection({'id': currentId, 'type': section})) 
     dispatch(updateCurrentId(currentId + 1)); 
   };
@@ -92,7 +93,8 @@ export function Welcome() {
                 name="basic"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
-                initialValues={{ remember: true }}
+                initialValues={{ section: 'education' }}
+                defaultValue={''}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
@@ -102,7 +104,6 @@ export function Welcome() {
                 name="section">
                   <Select
                     defaultValue='Тип секции'
-                    style={{ width: 150 }}
                     onChange={handleChange}
                     options={[
                       { value: 'experience', label: 'Опыт' },
@@ -127,8 +128,8 @@ export function Welcome() {
             Live View
           </div>
           <div className={s.resumeList}>
-            {sections && sections?.map((item) => { //рабочая версия
-              return <SectionPreview data={item}/>
+            {sections && sections?.map((item: TSection) => { //рабочая версия
+              return <SectionPreview data={item} key={item.id}/>
             })}
           </div>
 

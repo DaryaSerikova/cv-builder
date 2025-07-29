@@ -20,6 +20,7 @@ const sectionsSlice = createSlice({
   initialState,
   reducers: {
     addSection: (state, action: PayloadAction<TSection>) => {
+      // console.log('state: ', JSON.parse(JSON.stringify(state)));
       state.sections.push(action.payload);
       state.ids.push(+action.payload.id);
     },
@@ -30,38 +31,28 @@ const sectionsSlice = createSlice({
       }
     },
     removeSection: (state, action: PayloadAction<string>) => {
-      state.sections = state.sections.filter(s => s.id !== action.payload);
+      state.sections = state.sections.filter(s => s.id !== +action.payload);
       state.ids = state.ids.filter(s => s !== +action.payload); //не проверила
     },
-    reorderSections: (state, action: PayloadAction<{activeId: string; overId: string}>) => {
-      // console.log('----reorderSections--start-----')
-      
+    reorderSections: (state, action: PayloadAction<{activeId: string; overId: string}>) => {      
       const { activeId, overId } = action.payload;
-      const oldIndex = state.ids.indexOf(activeId); //они подходят и для ids, и sections
-      const newIndex = state.ids.indexOf(overId);
-
-      // console.log('state: ', JSON.parse(JSON.stringify(state)));
-      // console.log('action.payload: ', action.payload);
-      // console.log('activeId: ', activeId, ', newIndex: ', overId);
-      // console.log('поиск места indexOf, на котором находится id')
-      // console.log('oldIndex: ', oldIndex, ', newIndex: ', newIndex);
+      const oldIndex = state.ids.indexOf(+activeId); //они подходят и для ids, и sections
+      const newIndex = state.ids.indexOf(+overId);
 
       if (oldIndex !== -1 && newIndex !== -1) {
         //для ids
         const newIds = [...state.ids];
         newIds.splice(oldIndex, 1);
-        newIds.splice(newIndex, 0, activeId);
+        newIds.splice(newIndex, 0, +activeId);
         state.ids = newIds;
 
         //для sections
-        let activeSection = state?.sections?.filter((section) => section.id === activeId)[0];
+        let activeSection = state?.sections?.filter((section) => +section.id === +activeId)[0];
         const newSections = [...state.sections];
         newSections.splice(oldIndex, 1);
         newSections.splice(newIndex, 0, activeSection);
         state.sections = newSections;
-
       }
-      // console.log('----reorderSections----end-----')
     },
   },
 });

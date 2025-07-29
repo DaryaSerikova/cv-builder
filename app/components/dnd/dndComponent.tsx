@@ -14,11 +14,12 @@ const DraggableSection = ({ id }: { id: string }) => {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id });
   const { setNodeRef: setDroppableRef } = useDroppable({ id: id });
   const sections = useAppSelector((state) => state?.sections?.sections);
-  const section = sections?.filter((item) => item.id === id)[0];
+  const section = sections?.filter((item) => +item.id === +id)[0];
+  console.log('section: ', section)
 
-  useEffect(() => {
-    console.log('id: ', id, ', section:', section);
-  }, [id])
+  // useEffect(() => {
+  //   console.log('id: ', id, ', section:', section);
+  // }, [id])
 
   if (!section) return null;
 

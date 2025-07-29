@@ -1,20 +1,20 @@
 interface SectionBase {
-  id: string;
-  type: 'experience' | 'education' | 'skills' | 'certificates' | 'about';
+  id: number;
+  type: 'experience' | 'education' | 'skills' | 'certificates' | 'aboutme';
   order: number;
 }
 
 export interface ExperienceFieldType extends SectionBase {
-  position?: string; 
-  company?: string;
-  period?: string[]; 
-  description?: string;
+  position: string; 
+  company: string;
+  period: string[]; 
+  description: string;
 }
 
 export interface EducationFieldType extends SectionBase {
-  institution?: string,
-  specialty?: string,
-  period?: string[],
+  institution: string,
+  specialty: string,
+  period: string[],
 }
 
 export interface SkillsFieldType extends SectionBase {
@@ -22,19 +22,19 @@ export interface SkillsFieldType extends SectionBase {
 }
 
 export interface AboutmeFieldType extends SectionBase {
-  aboutme?: string; 
+  aboutme: string; 
 }
 
 export interface CertificatesFieldType extends SectionBase {
-  certificates?: string; 
+  certificates: string; 
 }
 
-export type TSection =  ///TSection второй в sectionSlice2
+export type TSection =  
   ExperienceFieldType 
   | EducationFieldType 
   | SkillsFieldType 
   | AboutmeFieldType 
   | CertificatesFieldType;
 
-  // experience, education, skills, certificates, aboutme
+// experience, education, skills, certificates, aboutme
 // 'experience' | 'education' | 'skills' | 'certificates' | 'aboutme'

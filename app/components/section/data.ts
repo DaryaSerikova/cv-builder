@@ -1,4 +1,4 @@
-import type { IArrItems } from "./section";
+import type { IArrItems, TEnRu, IObjEnRu } from "./section";
 
 export const arrExperience: IArrItems[] =  [
   {label: 'Должность', name: 'position', type: 'input'},
@@ -11,7 +11,6 @@ export const arrEducation: IArrItems[] = [
   {label: 'Учебное заведение', name: 'institution', type: 'input'},
   {label: 'Специальность', name: 'specialty', type: 'input'},
   {label: 'Период', name: 'period', type: 'datepicker'},
-  // {label: '', name: '', type: 'input'},
 ];
 
 export const arrSkills: IArrItems[] = [
@@ -25,9 +24,7 @@ export const arrAboutme: IArrItems[] = [
 export const arrCertificates: IArrItems[] = [
   {label: 'Сертификаты', name: 'certificates', type: 'textarea'},
 ]
-//Опыт, Образование, Навыки, Сертификаты, О себе.
-// experience, education, skills, certificates, aboutme
-//
+
 const enRuExperience = {
   'position': 'Должность',
   'company': 'Компания',
@@ -35,17 +32,17 @@ const enRuExperience = {
   'description': 'Описание',
 };
 
-const enRuEducation = {
+const enRuEducation:TEnRu = {
   'institution': 'Учебное заведение',
   'specialty': 'Специальность',
   'period': 'Период',
 };
 
-const enRuSkills = {
+const enRuSkills:TEnRu = {
   'skills': 'Навыки',
 };
 
-const enRuAboutme = {
+const enRuAboutme: TEnRu = {
   'aboutme': 'О себе'
 }
 
@@ -53,7 +50,7 @@ const enRuCertificates = {
   'certificates': 'Сертификаты'
 }
 
-export const objEngRu = {
+export const objEngRu: IObjEnRu = {
   'experience': {arr: enRuExperience, ru: 'Опыт'},
   'education': {arr: enRuEducation, ru: 'Образование'},
   'skills': {arr: enRuSkills, ru: 'Навыки'},

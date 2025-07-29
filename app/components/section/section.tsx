@@ -20,6 +20,15 @@ export interface IArrItems {
   name: string;
   type: 'input' | 'datepicker' | 'textarea';
 }
+export type TEnRu = {[key: string]: string};
+
+export interface IObjEnRu {
+  'experience': {arr: TEnRu, ru: string},
+  'education': {arr: TEnRu, ru: string},
+  'skills': {arr: TEnRu, ru: string},
+  'aboutme': {arr: TEnRu, ru: string},
+  'certificates': {arr: TEnRu, ru: string},
+}
 
 interface ISection {
   id: number;
@@ -53,15 +62,15 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
   }
   
 
-  const onFinish: FormProps<T>['onFinish'] = (values) => {
+  const onFinish: FormProps['onFinish'] = (values) => {
     // console.log('values:', values);
   };
   
-  const onFinishFailed: FormProps<T>['onFinishFailed'] = (errorInfo) => {
+  const onFinishFailed: FormProps['onFinishFailed'] = (errorInfo) => {
     // console.log('Failed:', errorInfo);
   };
 
-  const onValuesChange: FormProps<Section>['onValuesChange'] = (changedValues, allValues) => {
+  const onValuesChange: FormProps['onValuesChange'] = (changedValues, allValues) => {
     // console.log('changedValues: ', changedValues); //конкретно измененное поле
     // console.log('allValues (general): ', allValues)
     if (allValues?.period) {
@@ -70,11 +79,14 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
       allValues.period = [start, end];
     }
 
-    dispatch(updateSection({id: id, type: name, ...allValues})) //sectionsSlice
+    dispatch(updateSection({id: id, type: name, ...allValues}))
   }
   const handleRemove = () => {
-    dispatch(removeSection(id)) //sectionsSlice
+    dispatch(removeSection(id))
   }
+
+  console.log('name: ', name);
+  // console.log('objEngRu[`${name}`].ru: ', objEngRu[`${name}`].ru)
 
   return (
     <article className={s.section}>
@@ -91,8 +103,10 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
         }}
       >
 
-        <div className={s.name}>{objEngRu[`${name}`].ru}</div>
-        { objGetArray[`${name}`]?.map((field: IArrItems) => {
+        {/* <div className={s.name}>{objEngRu[`${name}`].ru}</div> */}
+        <div className={s.name}>{objEngRu[`${name}`]?.ru}</div>
+
+        { objGetArray[`${name}`]?.map((field: IArrItems, index) => {
           let child = <Input></Input>;
           if (field?.type === 'datepicker') child = <RangePicker format={'DD.MM.YYYY'}/>
           if (field?.type === 'textarea') child = <TextArea autoSize={{ minRows: 2, maxRows: 6 }}/>
@@ -100,7 +114,10 @@ const Section = <K extends keyof FormType>({ id, name }: ISection) => {
             <Item<K>
               data-no-drag
               label={isSimple ? '' : field?.label}
-              name={field?.name}>
+              name={field?.name}
+              key={`${field?.name}_${index}`}
+
+              >
                 {child}
             </Item>
           </>)})        
